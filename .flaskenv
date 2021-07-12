@@ -1,0 +1,2 @@
+FLASK_APP=movieapp
+FLASK_ENV=development
