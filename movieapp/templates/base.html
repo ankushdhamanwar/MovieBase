@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Base</title>
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/lightslider.css') }}" rel="stylesheet" />
+
+    <script src="{{ url_for('static',filename='js/JQuery3.3.1.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/lightslider.js') }}"></script>
+
+    <link href="{{ url_for('static', filename='img/fav icon.png') }}" rel="shortcut icon" />
+    <script src="https://kit.fontawesome.com/c8e4d183c2.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+    <nav>
+        <a href="{{ url_for('main.index') }}" class="logo">
+            <img src="{{ url_for('static', filename='img/logo.png') }}" />
+        </a>
+
+        <ul class="menu">
+            <li><a href="{{ url_for('main.index') }}">Home</a></li>
+            <li><a href="{{ url_for('main.movies') }}">Movies</a></li>
+            <li><a href="{{ url_for('main.tv') }}">TV Shows</a></li>
+        </ul>
+
+        <div class="search">
+            <input type="text" placeholder="Find Your Favourite Movies, TV Shows" />
+            <i class="fas fa-search"></i>
+        </div>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

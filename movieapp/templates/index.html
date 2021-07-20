@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <section id="main">
+        <h1 class="showcase-heading">Showcase</h1>
+
+        <ul id="autoWidth" class="cs-hidden">
+        
+            <!--box-1--------------------------->
+            <li class="item-a">
+                <!--showcase-box------------------->
+               <div class="showcase-box">
+                   <img src="{{ url_for('static', filename='img/s-1.jpg') }}"/>
+               </div>
+            </li>
+
+            <!--box-1--------------------------->
+            <li class="item-b">
+                <!--showcase-box------------------->
+               <div class="showcase-box">
+                   <img src="{{ url_for('static', filename='img/s-2.jpg') }}"/>
+               </div>
+            </li>
+
+            <!--box-1--------------------------->
+            <li class="item-c">
+                <!--showcase-box------------------->
+               <div class="showcase-box">
+                   <img src="{{ url_for('static', filename='img/s-3.jpg') }}"/>
+               </div>
+            </li>
+
+            <!--box-1--------------------------->
+            <li class="item-d">
+                <!--showcase-box------------------->
+               <div class="showcase-box">
+                   <img src="{{ url_for('static', filename='img/s-4.jpg') }}"/>
+               </div>
+            </li>
+        </ul>
+
+    </section>
+
+    <!-- latest TV Shows -->
+    <section id="latest">
+        <h2 class="latest-heading">Latest TV Shows</h2>
+        <ul id='autoWidth2' class="cs-hidden">
+            {% for item in data %}
+            <li class="item-a">
+                <div class="latest-box">
+                    <div class="latest-b-img">
+                        <img src="https://image.tmdb.org/t/p/w500/{{item.poster_path}}">
+                    </div>
+                    <div class="latest-b-text">
+                        <strong>{{item.name}}</strong>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <!-- latest TV Shows -->
+    <section id="latest1">
+        <h2 class="latest1-heading">Latest TV Shows</h2>
+        <ul id='autoWidth2' class="cs-hidden">
+            {% for item in data %}
+            <li class="item-a">
+                <div class="latest1-box">
+                    <div class="latest1-b-img">
+                        <img src="https://image.tmdb.org/t/p/w500/{{item.poster_path}}">
+                    </div>
+                    <div class="latest1-b-text">
+                        <strong>{{item.name}}</strong>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <!--  Slider Script -->
+    <script>
+        $(document).ready(function() {
+            $('#autoWidth,#autoWidth2,#autowidth3').lightSlider({
+                autoWidth:true,
+                loop:true,
+                onSliderLoad: function() {
+                    $('#autoWidth,#autoWidth2,#autowidth3,#autowidth3').removeClass('cS-hidden');
+                } 
+            });  
+        });
+    </script>
+
+{% endblock %} 
