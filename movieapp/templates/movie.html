@@ -1,5 +1,31 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>movie</h1>
+<div class="tv-heading">
+    <h2>Latest Movies</h2>
+</div>
+<section id="tv-list">
+    {% for item in movie_sorted %}
+    <a href="{{ url_for('main.moviedetail',imdb=item['imdb'].id) }}">
+        <li class="item-a">
+            <div class="tv-box">
+
+                <div class="tv-img">
+                    <img src="{{item['poster']}}" alt="Not Found"
+                        onerror=this.src="{{ url_for('static', filename='img/image.jpg') }}">
+
+                </div>
+                <div class="latest1-b-text">
+                    <strong>{{item['title']}}</strong>
+                </div>
+            </div>
+        </li>
+    </a>
+
+    {% endfor %}
+</section>
+<div class="btns">
+    <a href="{{ url_for('main.route2') }}">Previous</a>
+    <a href="{{ url_for('main.route1') }}">Next</a>
+</div>
 {% endblock %}

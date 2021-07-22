@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="tv-heading">
+    <h2>Movies Found</h2>
+</div>
+<section id="tv-list">
+    {% for item in movie_sorted[0] %}
+    <a href="{{ url_for('main.moviedetail',imdb=item['imdb'].id) }}">
+        <li class="item-a">
+            <div class="tv-box">
+
+                <div class="tv-img">
+                    <img src="{{item['poster']}}" alt="Not Found"
+                        onerror=this.src="{{ url_for('static', filename='img/image.jpg') }}">
+
+                </div>
+                <div class="latest1-b-text">
+                    <strong>{{item['title']}}</strong>
+                </div>
+            </div>
+        </li>
+    </a>
+
+    {% endfor %}
+</section>
+
+
+<div class="tv-heading">
+    <h2>TV Show Found</h2>
+</div>
+<section id="tv-list">
+    {% for item in movie_sorted[1] %}
+    <a href="{{ url_for('main.tvdetail', tv_id = item.id) }}">
+        <li class="item-a">
+            <div class="tv-box">
+
+                <div class="tv-img">
+                    <img src="https://image.tmdb.org/t/p/original/{{item.poster_path}}" alt="Not Found" onerror=this.src="{{ url_for('static', filename='img/image.jpg') }}">
+
+                </div>
+                <div class="latest1-b-text">
+                    <strong>{{item['name']}}</strong>
+                </div>
+            </div>
+        </li>
+    </a>
+    {% endfor %}
+</section>
+
+{% endblock %}

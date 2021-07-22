@@ -8,15 +8,19 @@
     {% for item in data %}
     <div class="tv-box">
         <div class="tv-img">
-            <img src="https://image.tmdb.org/t/p/original/{{item.poster_path}}">
+            <img src="https://image.tmdb.org/t/p/original/{{item.poster_path}}" alt="Not Found" onerror=this.src="{{ url_for('static', filename='img/image.jpg') }}">
         </div>
-        <a href="#">
+        <a href="{{ url_for('main.tvdetail', tv_id = item.id) }}">
             {{item.name}}
         </a>
     </div>
     {% endfor %}
-    <a href="{{ url_for('main.prevpage') }}">PREV</a>
-    <a href="{{ url_for('main.nextpage') }}">NEXT</a>
+    
+
+    <div class="btns">
+        <a href="{{ url_for('main.prevpage') }}">PREV</a>
+        <a href="{{ url_for('main.nextpage') }}">NEXT</a>
+    </div>
     
 </section>
 {% endblock %}

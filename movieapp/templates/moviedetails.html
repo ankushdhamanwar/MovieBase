@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<title>{{movie[0].title}}</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amatic+SC">
+<style>
+    body,
+    html {
+        height: 100%
+    }
+
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: "Amatic SC", sans-serif
+    }
+
+    .menu {
+        display: none
+    }
+
+    .bg-image {
+        /* The image used */
+        background-image: url("{{ url_for('static', filename='img/image.jpg') }}");
+
+        /* Add the blur effect */
+        filter: blur(8px);
+        -webkit-filter: blur(8px);
+
+        /* Full height */
+        height: 125%;
+
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .bgimg {
+        left: 0;
+        right: 0;
+        z-index: 9999;
+        margin-left: 20px;
+        margin-right: 20px;
+        text-align: center;
+    }
+</style>
+
+<body>
+
+    <!-- Header with image -->
+    <div class="bg-image">
+    </div>
+
+    <header class="bgimg" id="home">
+        <div class="w3-display-middle w3-center">
+
+            <div style="margin-bottom: 100px;"></div>
+            <span class="w3-text-white w3-hide-small" style="font-size:80px;padding-top:100px;">{{movie[0].title}}<br>
+                <img src="{{movie[0].poster}}" style="width:350px" height="400px"
+                    class="w3-margin-top w3-margin-bottom"><br>
+                <i class="fa fa-imdb" style="font-size:48px;color:red"></i>
+                <h2>RATING: {{movie[0].imdb.rating}}</h2>
+                <h2>OVERVIEW: {{movie[0].plot}}!</h2>
+                <h2>
+                    {% set list1 = movie[0].genres %}
+                    {% for y in list1%}
+                    {{y}}
+                    {% if not loop.last %},{% endif %}
+                    {%if loop.last%}.{%endif%}
+                    {%endfor%}
+                </h2>
+
+            </span>
+
+        </div>
+    </header>
+
+    <!-- About Container -->
+    <div class="w3-container w3-padding-64 w3-black w3-grayscale w3-xlarge" id="about">
+        <div class="w3-content">
+            <h1 class="w3-center w3-jumbo" style="margin-bottom:64px">PLOT</h1>
+            <p>
+                {{movie[0].fullplot}}
+            </p>
+
+
+        </div>
+    </div>
+
+    <!-- Menu Container -->
+    <div class="w3-container w3-black w3-padding-64 w3-xxlarge" id="menu">
+        <div class="w3-content">
+
+            <h1 class="w3-center w3-jumbo" style="margin-bottom:64px">MOVIE DETAILS</h1>
+            <div class="w3-row w3-center w3-border w3-border-dark-grey">
+                <a href="javascript:void(0)" onclick="openMenu(event, 'Pizza');" id="myLink">
+                    <div class="w3-col s6 tablink w3-padding-large w3-hover-red">Cinematography</div>
+                </a>
+                <a href="javascript:void(0)" onclick="openMenu(event, 'Pasta');">
+                    <div class="w3-col s6 tablink w3-padding-large w3-hover-red">More details</div>
+                </a>
+
+            </div>
+
+            <div id="Pizza" class="w3-container menu w3-padding-32 w3-white">
+                <h1><b>Cast</b></h1>
+                <p class="w3-text-grey">
+                    {% set list1 = movie[0].cast %}
+                    {% for y in list1%}
+                    {{y}}
+                    {% if not loop.last %},{% endif %}
+                    {%if loop.last%}.{%endif%}
+                    {%endfor%}
+                </p>
+                <hr>
+
+
+
+                <h1><b>Directors</b></h1>
+                <p class="w3-text-grey">
+
+                    {% set list1 = movie[0].directors %}
+                    {% for y in list1%}
+                    {{y}}
+                    {% if not loop.last %},{% endif %}
+                    {%if loop.last%}.{%endif%}
+                    {%endfor%}
+                </p>
+                <hr>
+
+                <h1><b>Writters</b></h1>
+                <p class="w3-text-grey">
+                    {% set list1 = movie[0].writers %}
+                    {% for y in list1%}
+                    {{y}}
+                    {% if not loop.last %},{% endif %}
+                    {%if loop.last%}.{%endif%}
+                    {%endfor%}
+
+                </p>
+                <hr>
+
+            </div>
+
+            <div id="Pasta" class="w3-container menu w3-padding-32 w3-white">
+                <h1><b>Released Date</b> <span class="w3-tag w3-grey w3-round"></span></h1>
+                <p class="w3-text-grey">
+                    {{movie[0].released}}
+                </p>
+                <hr>
+
+                <h1><b>Countries</b> </h1>
+                <p class="w3-text-grey">
+                    {% set list1 = movie[0].countries %}
+                    {% for y in list1%}
+                    {{y}}
+                    {% if not loop.last %},{% endif %}
+                    {%if loop.last%}.{%endif%}
+                    {%endfor%}
+                </p>
+                <hr>
+
+                <h1><b>Runtime</b> </h1>
+                <p class="w3-text-grey">
+                    {{movie[0].runtime}} minutes
+                </p>
+                <hr>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        // Tabbed Menu
+        function openMenu(evt, menuName) {
+            var i, x, tablinks;
+            x = document.getElementsByClassName("menu");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablink");
+            for (i = 0; i < x.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+            }
+            document.getElementById(menuName).style.display = "block";
+            evt.currentTarget.firstElementChild.className += " w3-red";
+        }
+        document.getElementById("myLink").click();
+    </script>
+
+</body>
+
+</html>
