@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <section id="main">
+        <h1 class="showcase-heading">Showcase</h1>
+
+        <ul id="autoWidth" class="cs-hidden">
+            {% for item in data[0] %}}
+            <!--box-1--------------------------->
+            <li class="item-a">
+                <!--showcase-box------------------->
+               <div class="showcase-box">
+                   <img src="{{url_for('main.getimage', filename=item['image_name'])}}"/>
+               </div>
+            </li>
+            {% endfor %}
+            
+        </ul>
+
+    </section>
+
+    <!-- latest Movies -->
+    <section id="latest">
+        <h2 class="latest-heading">Popular Movies</h2>
+        <ul id='autoWidth2' class="cs-hidden">
+            {% for item in data[2] %}
+            <a href="{{ url_for('main.moviedetail',imdb=item['imdb'].id) }}">
+            <li class="item-a">
+                <div class="latest-box">
+                    <div class="latest-b-img">
+                        <img src="{{item['poster']}}" alt="Not Found" onerror=this.src="{{ url_for('static', filename='img/image.jpg') }}">
+                    </div>
+                    <div class="latest-b-text">
+                        <strong>{{item.title}}</strong>
+                    </div>
+                </div>
+            </li>
+            </a>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <!-- latest TV Shows -->
+    <section id="latest1">
+        <h2 class="latest1-heading">Popular TV Shows</h2>
+        <ul id='autoWidth2' class="cs-hidden">
+            {% for item in data[1] %}
+            <a href="{{ url_for('main.tvdetail', tv_id = item.id) }}">
+            <li class="item-a">
+                <div class="latest1-box">
+                    <div class="latest1-b-img">
+                        <img src="https://image.tmdb.org/t/p/w500/{{item.poster_path}}">
+                    </div>
+                    <div class="latest1-b-text">
+                        <strong>{{item.name}}</strong>
+                    </div>
+                </div>
+            </li>
+            </a>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <!--  Slider Script -->
+    <script>
+        $(document).ready(function() {
+            $('#autoWidth').lightSlider({
+                autoWidth:true,
+                auto:true,
+                loop:true,
+                onSliderLoad: function() {
+                    $('#autoWidth,#autoWidth2,#autowidth3,#autowidth3').removeClass('cS-hidden');
+                } 
+            });  
+        });
+        $(document).ready(function() {
+            $('#autoWidth2,#autowidth3').lightSlider({
+                autoWidth:true,
+                loop:true,
+                onSliderLoad: function() {
+                    $('#autoWidth,#autoWidth2,#autowidth3,#autowidth3').removeClass('cS-hidden');
+                } 
+            });  
+        });
+    </script>
+
+{% endblock %} 

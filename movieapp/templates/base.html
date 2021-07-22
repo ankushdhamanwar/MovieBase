@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Base</title>
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/lightslider.css') }}" rel="stylesheet" />
+
+    <script src="{{ url_for('static',filename='js/JQuery3.3.1.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/lightslider.js') }}"></script>
+
+    <link href="{{ url_for('static', filename='img/fav icon.png') }}" rel="shortcut icon" />
+    <script src="https://kit.fontawesome.com/c8e4d183c2.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+    <nav>
+        <a href="{{ url_for('main.index') }}" class="logo">
+            <img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_1-5bdc75aaebeb75dc7ae79426ddd9be3b2be1e342510f8202baf6bffa71d7f5c4.svg" />
+        </a>
+
+        <ul class="menu">
+            <li><a href="{{ url_for('main.index') }}">Home</a></li>
+            <li><a href="{{ url_for('main.movies') }}">Movies</a></li>
+            <li><a href="{{ url_for('main.tv') }}">TV Shows</a></li>
+        </ul>
+        <form method="POST">
+        <div class="search">
+            <input type="text" placeholder="Find Your Favourite Movies, TV Shows" name="search" />
+            <i class="fas fa-search"></i>
+        </div>
+        </form>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
